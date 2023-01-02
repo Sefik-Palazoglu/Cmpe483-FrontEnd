@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -87,6 +87,23 @@ function App() {
     })
   }
 
+  let handleSubmitProjectProposal = (event) => {
+    event.preventDefault();
+    sendSubmitProjectProposal(
+      event.target.ipfshash.value, 
+      event.target.votedeadline.value,
+      event.target.paymentamounts.value,
+      event.target.payschedule.value);
+  }
+
+  const sendSubmitProjectProposal = (ipfshash, votedeadline, paymentamounts, payschedule) => {
+    submitProjectProposal(ipfshash, votedeadline, paymentamounts, payschedule).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   let handleVoteForProjectPayment = (event) => {
     event.preventDefault();
     sendVoteForProjectPayment(event.target.projectId.value, event.target.choice.value);
@@ -143,6 +160,21 @@ function App() {
           <input type="text" name="projectId" />
           choice:
           <input type="text" name="choice" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleSubmitProjectProposal}>
+        <label>
+          submitProjectProposal:
+          ipfshash:
+          <input type="text" name="ipfshash" />
+          votedeadline:
+          <input type="text" name="votedeadline" />
+          paymentamounts:
+          <input type="text" name="paymentamounts" />
+          payschedule:
+          <input type="text" name="payschedule" />
         </label>
         <input type="submit" value="Submit" />
       </form>
