@@ -897,5 +897,5 @@ export const donateEther = async (valueInWei) => {
 		await init();
 	}
 	console.log(`selected account in donateEther: ${selectedAccount}`);
-	return myGovContract.methods.faucet().send({from: selectedAccount, });
+	return myGovContract.methods.donateEther().send({from: selectedAccount, value: valueInWei});
 }

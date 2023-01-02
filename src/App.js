@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, faucet, init} from './Web3Client'
+import {balanceOf, donateEther, faucet, init} from './Web3Client'
 
 function App() {
   const [balance, setBalance] = useState(0);
@@ -26,10 +26,19 @@ function App() {
     })
   }
 
+  const sendDonateEther = (valueInWei) => {
+    donateEther(valueInWei).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className="App">
       {<button onClick={() => fetchBalanceOf()}>balanceOf {balance}</button>}
       {<button onClick={() => callFaucet()}>faucet </button>}
+      {<button onClick={() => sendDonateEther(40000000000)}>donateEther </button>}
     </div>
   );
 }
