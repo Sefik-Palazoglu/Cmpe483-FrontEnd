@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -171,6 +171,21 @@ function App() {
       event.target.projectid.value);
   }
 
+  const sendGetSurveyResults = (surveyid) => {
+    getSurveyResults(surveyid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetSurveyResults = (event) => {
+    event.preventDefault();
+    sendGetSurveyResults(
+      event.target.surveyid.value);
+  }
+
+
   return (
     <div className="App">
       {<button onClick={() => fetchBalanceOf()}>balanceOf {balance}</button>}
@@ -285,6 +300,15 @@ function App() {
           withdrawProjectPayment:
           projectid:
           <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetSurveyResults}>
+        <label>
+          getSurveyResults:
+          surveyid:
+          <input type="text" name="surveyid" />
         </label>
         <input type="submit" value="Submit" />
       </form>

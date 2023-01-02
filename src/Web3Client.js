@@ -971,3 +971,12 @@ export const withdrawProjectPayment = async (projectid) => {
 	console.log(`selected account in withdrawProjectPayment: ${selectedAccount}`);
 	return myGovContract.methods.withdrawProjectPayment(projectid).send({from: selectedAccount});
 }
+
+// TODO: metamask connection error?
+export const getSurveyResults = async (surveyid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getSurveyResults: ${selectedAccount}`);
+	return myGovContract.methods.getSurveyResults(surveyid).call();
+}
