@@ -87,27 +87,29 @@ function App() {
     })
   }
 
+  let handleVoteForProjectPayment = (event) => {
+    event.preventDefault();
+    sendVoteForProjectPayment(event.target.projectId.value, event.target.choice.value);
+  }
+
   let handleSubmitProjectProposal = (event) => {
     event.preventDefault();
     sendSubmitProjectProposal(
       event.target.ipfshash.value, 
       event.target.votedeadline.value,
-      event.target.paymentamounts.value,
-      event.target.payschedule.value);
+      event.target.paymentamounts.value.split(','),
+      event.target.payschedule.value.split(','),
+      event.target.valueInWei.value);
   }
 
-  const sendSubmitProjectProposal = (ipfshash, votedeadline, paymentamounts, payschedule) => {
-    submitProjectProposal(ipfshash, votedeadline, paymentamounts, payschedule).then(tx => {
+  const sendSubmitProjectProposal = (ipfshash, votedeadline, paymentamounts, payschedule, valueInWei) => {
+    submitProjectProposal(ipfshash, votedeadline, paymentamounts, payschedule, valueInWei).then(tx => {
       console.log(tx);
     }).catch(err => {
       console.log(err);
     })
   }
 
-  let handleVoteForProjectPayment = (event) => {
-    event.preventDefault();
-    sendVoteForProjectPayment(event.target.projectId.value, event.target.choice.value);
-  }
 
   return (
     <div className="App">
@@ -175,6 +177,8 @@ function App() {
           <input type="text" name="paymentamounts" />
           payschedule:
           <input type="text" name="payschedule" />
+          valueInWei:
+          <input type="text" name="valueInWei" />
         </label>
         <input type="submit" value="Submit" />
       </form>

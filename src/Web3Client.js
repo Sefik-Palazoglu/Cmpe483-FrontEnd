@@ -932,10 +932,10 @@ export const voteForProjectPayment = async (projectId, choice) => {
 	return myGovContract.methods.voteForProjectPayment(projectId, choice).send({from: selectedAccount});
 }
 
-export const submitProjectProposal = async (ipfshash, votedeadline, paymentamounts, payschedule) => {
+export const submitProjectProposal = async (ipfshash, votedeadline, paymentamounts, payschedule, valueInWei) => {
 	if (!isInitialized) {
 		await init();
 	}
-	console.log(`selected account in voteForProjectPayment: ${selectedAccount}`);
-	return myGovContract.methods.submitProjectProposal(ipfshash, votedeadline, paymentamounts, payschedule).send({from: selectedAccount});
+	console.log(`selected account in submitProjectProposal: ${selectedAccount}`);
+	return myGovContract.methods.submitProjectProposal(ipfshash, votedeadline, paymentamounts, payschedule).send({from: selectedAccount, value: valueInWei});
 }
