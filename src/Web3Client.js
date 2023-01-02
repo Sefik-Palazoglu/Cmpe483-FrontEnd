@@ -939,3 +939,11 @@ export const submitProjectProposal = async (ipfshash, votedeadline, paymentamoun
 	console.log(`selected account in submitProjectProposal: ${selectedAccount}`);
 	return myGovContract.methods.submitProjectProposal(ipfshash, votedeadline, paymentamounts, payschedule).send({from: selectedAccount, value: valueInWei});
 }
+
+export const submitSurvey = async (ipfshash, surveydeadline, numchoices, atmostchoice, valueInWei) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in submitSurvey: ${selectedAccount}`);
+	return myGovContract.methods.submitSurvey(ipfshash, surveydeadline, numchoices, atmostchoice).send({from: selectedAccount, value: valueInWei});
+}

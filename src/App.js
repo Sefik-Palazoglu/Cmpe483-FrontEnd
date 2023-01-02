@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -110,6 +110,23 @@ function App() {
     })
   }
 
+  const sendSubmitSurvey = (ipfshash, surveydeadline, numchoices, atmostchoice, valueInWei) => {
+    submitSurvey(ipfshash, surveydeadline, numchoices, atmostchoice, valueInWei).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleSubmitSurvey = (event) => {
+    event.preventDefault();
+    sendSubmitSurvey(
+      event.target.ipfshash.value, 
+      event.target.surveydeadline.value,
+      event.target.numchoices.value,
+      event.target.atmostchoice.value,
+      event.target.valueInWei.value);
+  }
 
   return (
     <div className="App">
@@ -177,6 +194,36 @@ function App() {
           <input type="text" name="paymentamounts" />
           payschedule:
           <input type="text" name="payschedule" />
+          valueInWei:
+          <input type="text" name="valueInWei" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleSubmitSurvey}>
+        <label>
+          submitSurvey:
+          ipfshash:
+          <input type="text" name="ipfshash" />
+          surveydeadline:
+          <input type="text" name="surveydeadline" />
+          numchoices:
+          <input type="text" name="numchoices" />
+          atmostchoice:
+          <input type="text" name="atmostchoice" />
+          valueInWei:
+          <input type="text" name="valueInWei" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleSubmitSurvey}>
+        <label>
+          takeSurvey:
+          surveyid:
+          <input type="text" name="surveyid" />
+          choices:
+          <input type="text" name="choices" />
           valueInWei:
           <input type="text" name="valueInWei" />
         </label>
