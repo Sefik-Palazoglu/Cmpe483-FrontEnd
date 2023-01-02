@@ -46,7 +46,7 @@
 html,
 body {
   height: 100vh;
-  background: #000000;
+  background: #ffffff;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -67,21 +67,6 @@ button {
   border: none;
 }
 
-.stripe {
-  border-radius: 40px;
-  border: 2px solid #ffffff;
-  color: #ffffff;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(20, 25, 25, 0.6),
-    rgba(25, 25, 25, 0.6) 10%,
-    #4c4c4c 10%,
-    #4c4c4c 20%
-  );
-  background-size: 100%;
-  transition: background 0.3s ease-in-out;
-}
-
-.stripe:hover {
-  background-position: 150px;
+button:hover {
+  background: #e43d3d;
 }
