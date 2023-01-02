@@ -947,3 +947,27 @@ export const submitSurvey = async (ipfshash, surveydeadline, numchoices, atmostc
 	console.log(`selected account in submitSurvey: ${selectedAccount}`);
 	return myGovContract.methods.submitSurvey(ipfshash, surveydeadline, numchoices, atmostchoice).send({from: selectedAccount, value: valueInWei});
 }
+
+export const takeSurvey = async (surveyid, choices) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in takeSurvey: ${selectedAccount}`);
+	return myGovContract.methods.takeSurvey(surveyid, choices).send({from: selectedAccount});
+}
+
+export const reserveProjectGrant = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in reserveProjectGrant: ${selectedAccount}`);
+	return myGovContract.methods.reserveProjectGrant(projectid).send({from: selectedAccount});
+}
+
+export const withdrawProjectPayment = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in withdrawProjectPayment: ${selectedAccount}`);
+	return myGovContract.methods.withdrawProjectPayment(projectid).send({from: selectedAccount});
+}

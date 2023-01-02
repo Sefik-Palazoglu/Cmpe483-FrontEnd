@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -128,6 +128,49 @@ function App() {
       event.target.valueInWei.value);
   }
 
+  const sendTakeSurvey = (surveyid, choices) => {
+    takeSurvey(surveyid, choices).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleTakeSurvey = (event) => {
+    event.preventDefault();
+    sendTakeSurvey(
+      event.target.surveyid.value, 
+      event.target.choices.value.split(','));
+  }
+
+  const sendReserveProjectGrant = (projectid) => {
+    reserveProjectGrant(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleReserveProjectGrant = (event) => {
+    event.preventDefault();
+    sendReserveProjectGrant(
+      event.target.projectid.value);
+  }
+
+  const sendWithdrawProjectPayment = (projectid) => {
+    withdrawProjectPayment(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleWithdrawProjectPayment = (event) => {
+    event.preventDefault();
+    sendWithdrawProjectPayment(
+      event.target.projectid.value);
+  }
+
   return (
     <div className="App">
       {<button onClick={() => fetchBalanceOf()}>balanceOf {balance}</button>}
@@ -217,15 +260,31 @@ function App() {
         <input type="submit" value="Submit" />
       </form>
 
-      <form onSubmit = {handleSubmitSurvey}>
+      <form onSubmit = {handleTakeSurvey}>
         <label>
           takeSurvey:
           surveyid:
           <input type="text" name="surveyid" />
           choices:
           <input type="text" name="choices" />
-          valueInWei:
-          <input type="text" name="valueInWei" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleReserveProjectGrant}>
+        <label>
+          reserveProjectGrant:
+          projectid:
+          <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleWithdrawProjectPayment}>
+        <label>
+          withdrawProjectPayment:
+          projectid:
+          <input type="text" name="projectid" />
         </label>
         <input type="submit" value="Submit" />
       </form>
