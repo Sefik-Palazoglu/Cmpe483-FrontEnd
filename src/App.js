@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import {balanceOf, donateEther, faucet, init} from './Web3Client'
+import React from 'react';
 
 function App() {
   const [balance, setBalance] = useState(0);
@@ -34,11 +35,23 @@ function App() {
     })
   }
 
+  let handleDonateSubmit = (event) => {
+    event.preventDefault();
+    sendDonateEther(event.target.wei.value);
+  }
+
   return (
     <div className="App">
       {<button onClick={() => fetchBalanceOf()}>balanceOf {balance}</button>}
       {<button onClick={() => callFaucet()}>faucet </button>}
-      {<button onClick={() => sendDonateEther(40000000000)}>donateEther </button>}
+      
+      <form onSubmit = {handleDonateSubmit}>
+        <label>
+          Wei:
+          <input type="text" name="wei" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   );
 }
