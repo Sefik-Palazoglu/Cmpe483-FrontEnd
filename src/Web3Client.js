@@ -1040,3 +1040,11 @@ export const getNoOfProjectProposals = async () => {
 	console.log(`selected account in getNoOfProjectProposals: ${selectedAccount}`);
 	return myGovContract.methods.getNoOfProjectProposals().call();
 }
+
+export const getNoOfFundedProjects = async () => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getNoOfFundedProjects: ${selectedAccount}`);
+	return myGovContract.methods.getNoOfFundedProjects().call();
+}
