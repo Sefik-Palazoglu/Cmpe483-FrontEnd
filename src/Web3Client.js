@@ -998,3 +998,45 @@ export const getSurveyOwner = async (surveyid) => {
 	console.log(`selected account in getSurveyOwner: ${selectedAccount}`);
 	return myGovContract.methods.getSurveyOwner(surveyid).call(1);
 }
+
+export const getIsProjectFunded = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getIsProjectFunded: ${selectedAccount}`);
+	return myGovContract.methods.getIsProjectFunded(projectid).call(1);
+}
+
+
+export const getProjectNextPayment = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getProjectNextPayment: ${selectedAccount}`);
+	return myGovContract.methods.getProjectNextPayment(projectid).call(1);
+}
+
+export const getProjectOwner = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getProjectOwner: ${selectedAccount}`);
+	return myGovContract.methods.getProjectOwner(projectid).call(1);
+}
+
+export const getProjectInfo = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getProjectInfo: ${selectedAccount}`);
+	return myGovContract.methods.getProjectInfo(projectid).call(4);
+}
+
+// making call() instead of call(0) worked, why?
+export const getNoOfProjectProposals = async () => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getNoOfProjectProposals: ${selectedAccount}`);
+	return myGovContract.methods.getNoOfProjectProposals().call();
+}

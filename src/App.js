@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults, getSurveyInfo, getSurveyOwner} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults, getSurveyInfo, getSurveyOwner, getIsProjectFunded, getProjectNextPayment, getProjectOwner, getProjectInfo, getNoOfProjectProposals} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -213,6 +213,75 @@ function App() {
       event.target.surveyid.value);
   }
 
+  const sendGetIsProjectFunded = (projectid) => {
+    getIsProjectFunded(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetIsProjectFunded = (event) => {
+    event.preventDefault();
+    sendGetIsProjectFunded(
+      event.target.projectid.value);
+  }
+
+  const sendGetProjectNextPayment = (projectid) => {
+    getProjectNextPayment(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetProjectNextPayment = (event) => {
+    event.preventDefault();
+    sendGetProjectNextPayment(
+      event.target.projectid.value);
+  }
+
+  const sendGetProjectOwner = (projectid) => {
+    getProjectOwner(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetProjectOwner = (event) => {
+    event.preventDefault();
+    sendGetProjectOwner(
+      event.target.projectid.value);
+  }
+
+  const sendGetProjectInfo = (projectid) => {
+    getProjectInfo(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetProjectInfo = (event) => {
+    event.preventDefault();
+    sendGetProjectInfo(
+      event.target.projectid.value);
+  }
+
+  const sendGetNoOfProjectProposals = () => {
+    getNoOfProjectProposals().then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetNoOfProjectProposals = (event) => {
+    event.preventDefault();
+    sendGetNoOfProjectProposals();
+  }
+
 
   return (
     <div className="App">
@@ -355,6 +424,50 @@ function App() {
           getSurveyOwner:
           surveyid:
           <input type="text" name="surveyid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetIsProjectFunded}>
+        <label>
+          getIsProjectFunded:
+          projectid:
+          <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetProjectNextPayment}>
+        <label>
+          getProjectNextPayment:
+          projectid:
+          <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetProjectOwner}>
+        <label>
+          getProjectOwner:
+          projectid:
+          <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetProjectInfo}>
+        <label>
+          getProjectInfo:
+          activityid:
+          <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetNoOfProjectProposals}>
+        <label>
+          getNoOfProjectProposals:
+          projectid:
         </label>
         <input type="submit" value="Submit" />
       </form>
