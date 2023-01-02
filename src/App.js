@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -66,6 +66,32 @@ function App() {
     sendDonateMyGovToken(event.target.amount.value);
   }
 
+  const sendVoteForProjectProposal = (projectId, choice) => {
+    voteForProjectProposal(projectId, choice).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleVoteForProjectProposal = (event) => {
+    event.preventDefault();
+    sendVoteForProjectProposal(event.target.projectId.value, event.target.choice.value);
+  }
+
+  const sendVoteForProjectPayment = (projectId, choice) => {
+    voteForProjectPayment(projectId, choice).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleVoteForProjectPayment = (event) => {
+    event.preventDefault();
+    sendVoteForProjectPayment(event.target.projectId.value, event.target.choice.value);
+  }
+
   return (
     <div className="App">
       {<button onClick={() => fetchBalanceOf()}>balanceOf {balance}</button>}
@@ -88,12 +114,35 @@ function App() {
           <input type="text" name="projectId" />
         </label>
         <input type="submit" value="Submit" />
+
       </form>
       <form onSubmit = {handleDonateMyGovTokenSubmit}>
         <label>
           donateMyGovToken:
           Amount:
           <input type="text" name="amount" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleVoteForProjectProposal}>
+        <label>
+          voteForProjectProposal:
+          projectId:
+          <input type="text" name="projectId" />
+          choice:
+          <input type="text" name="choice" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleVoteForProjectPayment}>
+        <label>
+          voteForProjectPayment:
+          projectId:
+          <input type="text" name="projectId" />
+          choice:
+          <input type="text" name="choice" />
         </label>
         <input type="submit" value="Submit" />
       </form>

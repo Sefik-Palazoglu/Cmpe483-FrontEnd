@@ -904,7 +904,7 @@ export const delegateVoteTo = async (address, projectId) => {
 	if (!isInitialized) {
 		await init();
 	}
-	console.log(`selected account in donateEther: ${selectedAccount}`);
+	console.log(`selected account in delegateVoteTo: ${selectedAccount}`);
 	return myGovContract.methods.delegateVoteTo(address, projectId).send({from: selectedAccount});
 }
 
@@ -912,6 +912,22 @@ export const donateMyGovToken = async (amount) => {
 	if (!isInitialized) {
 		await init();
 	}
-	console.log(`selected account in donateEther: ${selectedAccount}`);
+	console.log(`selected account in donateMyGovToken: ${selectedAccount}`);
 	return myGovContract.methods.donateMyGovToken(amount).send({from: selectedAccount});
+}
+
+export const voteForProjectProposal = async (projectId, choice) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in voteForProjectProposal: ${selectedAccount}`);
+	return myGovContract.methods.voteForProjectProposal(projectId, choice).send({from: selectedAccount});
+}
+
+export const voteForProjectPayment = async (projectId, choice) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in voteForProjectPayment: ${selectedAccount}`);
+	return myGovContract.methods.voteForProjectPayment(projectId, choice).send({from: selectedAccount});
 }
