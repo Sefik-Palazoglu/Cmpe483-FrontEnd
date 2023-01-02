@@ -1048,3 +1048,19 @@ export const getNoOfFundedProjects = async () => {
 	console.log(`selected account in getNoOfFundedProjects: ${selectedAccount}`);
 	return myGovContract.methods.getNoOfFundedProjects().call();
 }
+
+export const getEtherReceivedByProject = async (projectid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getEtherReceivedByProject: ${selectedAccount}`);
+	return myGovContract.methods.getEtherReceivedByProject(projectid).call();
+}
+
+export const getNoOfSurveys = async () => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getNoOfSurveys: ${selectedAccount}`);
+	return myGovContract.methods.getNoOfSurveys().call();
+}

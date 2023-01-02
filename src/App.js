@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults, getSurveyInfo, getSurveyOwner, getIsProjectFunded, getProjectNextPayment, getProjectOwner, getProjectInfo, getNoOfProjectProposals, getNoOfFundedProjects} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults, getSurveyInfo, getSurveyOwner, getIsProjectFunded, getProjectNextPayment, getProjectOwner, getProjectInfo, getNoOfProjectProposals, getNoOfFundedProjects, getEtherReceivedByProject, getNoOfSurveys} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -295,6 +295,32 @@ function App() {
     sendGetNoOfFundedProjects();
   }
 
+  const sendGetEtherReceivedByProject = (projectid) => {
+    getEtherReceivedByProject(projectid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetEtherReceivedByProject = (event) => {
+    event.preventDefault();
+    sendGetEtherReceivedByProject(
+      event.target.projectid.value);
+  }
+
+  const sendGetNoOfSurveys = () => {
+    getNoOfSurveys().then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetNoOfSurveys = (event) => {
+    event.preventDefault();
+    sendGetNoOfSurveys();
+  }
 
   return (
     <div className="App">
@@ -480,7 +506,6 @@ function App() {
       <form onSubmit = {handleGetNoOfProjectProposals}>
         <label>
           getNoOfProjectProposals:
-          projectid:
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -488,10 +513,26 @@ function App() {
       <form onSubmit = {handleGetNoOfFundedProjects}>
         <label>
           getNoOfFundedProjects:
-          projectid:
         </label>
         <input type="submit" value="Submit" />
       </form>
+
+      <form onSubmit = {handleGetEtherReceivedByProject}>
+        <label>
+          getEtherReceivedByProject:
+          projectid:
+          <input type="text" name="projectid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetNoOfSurveys}>
+        <label>
+          getNoOfSurveys:
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
     </div>
   );
 }
