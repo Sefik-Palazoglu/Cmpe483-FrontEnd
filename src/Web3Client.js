@@ -899,3 +899,19 @@ export const donateEther = async (valueInWei) => {
 	console.log(`selected account in donateEther: ${selectedAccount}`);
 	return myGovContract.methods.donateEther().send({from: selectedAccount, value: valueInWei});
 }
+
+export const delegateVoteTo = async (address, projectId) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in donateEther: ${selectedAccount}`);
+	return myGovContract.methods.delegateVoteTo(address, projectId).send({from: selectedAccount});
+}
+
+export const donateMyGovToken = async (amount) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in donateEther: ${selectedAccount}`);
+	return myGovContract.methods.donateMyGovToken(amount).send({from: selectedAccount});
+}
