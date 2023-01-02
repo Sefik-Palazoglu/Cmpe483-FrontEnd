@@ -978,5 +978,23 @@ export const getSurveyResults = async (surveyid) => {
 		await init();
 	}
 	console.log(`selected account in getSurveyResults: ${selectedAccount}`);
-	return myGovContract.methods.getSurveyResults(surveyid).call();
+	return myGovContract.methods.getSurveyResults(surveyid).call(2);
+}
+
+// TODO: metamask connection error?
+export const getSurveyInfo = async (surveyid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getSurveyInfo: ${selectedAccount}`);
+	return myGovContract.methods.getSurveyInfo(surveyid).call(4);
+}
+
+// TODO: metamask connection error?
+export const getSurveyOwner = async (surveyid) => {
+	if (!isInitialized) {
+		await init();
+	}
+	console.log(`selected account in getSurveyOwner: ${selectedAccount}`);
+	return myGovContract.methods.getSurveyOwner(surveyid).call(1);
 }

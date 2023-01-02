@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults} from './Web3Client'
+import {balanceOf, delegateVoteTo, donateEther, donateMyGovToken, faucet, init, voteForProjectProposal, voteForProjectPayment, submitProjectProposal, submitSurvey, takeSurvey, reserveProjectGrant, withdrawProjectPayment, getSurveyResults, getSurveyInfo, getSurveyOwner} from './Web3Client'
 import React from 'react';
 
 function App() {
@@ -185,6 +185,34 @@ function App() {
       event.target.surveyid.value);
   }
 
+  const sendGetSurveyInfo = (surveyid) => {
+    getSurveyInfo(surveyid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetSurveyInfo = (event) => {
+    event.preventDefault();
+    sendGetSurveyInfo(
+      event.target.surveyid.value);
+  }
+
+  const sendGetSurveyOwner = (surveyid) => {
+    getSurveyOwner(surveyid).then(tx => {
+      console.log(tx);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  let handleGetSurveyOwner = (event) => {
+    event.preventDefault();
+    sendGetSurveyOwner(
+      event.target.surveyid.value);
+  }
+
 
   return (
     <div className="App">
@@ -307,6 +335,24 @@ function App() {
       <form onSubmit = {handleGetSurveyResults}>
         <label>
           getSurveyResults:
+          surveyid:
+          <input type="text" name="surveyid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetSurveyInfo}>
+        <label>
+          getSurveyInfo:
+          surveyid:
+          <input type="text" name="surveyid" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
+      <form onSubmit = {handleGetSurveyOwner}>
+        <label>
+          getSurveyOwner:
           surveyid:
           <input type="text" name="surveyid" />
         </label>
